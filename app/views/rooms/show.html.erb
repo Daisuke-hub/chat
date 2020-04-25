@@ -1,0 +1,12 @@
+<h1>Chat Room</h1>
+
+<ul>
+  <% @message.each do |message| %>
+    <li><%= message.content %></li>
+  <% end %>
+</ul>
+
+<ul id="add"></ul>
+
+<input type="text", class="chat-input", autofocus>
+<button class="button">送信</button>
