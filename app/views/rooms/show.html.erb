@@ -1,7 +1,7 @@
 <h1>Chat Room</h1>
 
 <ul>
-  <% @message.each do |message| %>
+  <% @messages.each do |message| %>
     <li><%= message.content %></li>
   <% end %>
 </ul>
@@ -10,3 +10,4 @@
 
 <input type="text", class="chat-input", autofocus>
 <button class="button">送信</button>
+<input type="hidden" class="room_id" value="<%= @room.id %>">

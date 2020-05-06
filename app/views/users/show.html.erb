@@ -1,0 +1,5 @@
+<h1><%= @user.name %>のプロフィール</h1>
+
+<%= link_to user_rooms_path(@user), method: :post do %>
+  <div><%= @user.name %>とチャットをする<div>
+<% end %>
