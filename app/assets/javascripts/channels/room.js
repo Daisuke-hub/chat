@@ -1,7 +1,6 @@
 App.room = App.cable.subscriptions.create("RoomChannel", {
 
   connected: function() {
-    console.log ("connected");
     // Called when the subscription is ready for use on the server
   },
 
@@ -10,24 +9,26 @@ App.room = App.cable.subscriptions.create("RoomChannel", {
   },
 
   received: function(data) {
-    console.log (data);
-    $('<li>',{
-      class: "receive_balloon_right",
-      text: data,
-    }).appendTo("#add");
-
+    var receiver_room_id = $(".room_id").val();
+    if(data["room_id"] == receiver_room_id){
+      $('<li>',{
+        class: "hoge",
+        text: data["content"],
+      }).appendTo("#add");
+    };
     // Called when there's incoming data on the websocket for this channel
   },
 
-  speak: function(content) {
-    return this.perform('speak', {message: content});
+  speak: function(content, room_id) {
+    return this.perform('speak', {content: content, room_id: room_id});
   }
 });
 
 $(function(){
   $(".button").on("click",function(){
+    var room_id = $(".room_id").val();
     var content = $(".chat-input").val();
-    App.room.speak(content);
+    App.room.speak(content, room_id);
     $(".chat-input").val("")
   });
 });
